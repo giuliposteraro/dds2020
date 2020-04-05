@@ -15,9 +15,10 @@ Requerimientos
 Crear un proyecto Maven siguiendo el arquetipo básico. El mismo debe ser creado
 sobre un repositorio Github creado por el alumno. El proyecto debe cumplir los siguientes
 requerimientos:
-● La operación de egreso debe poder calcular su valor en base a los items que contiene
+
+● La operación de egreso debe poder calcular su valor en base a los items que contiene.
 ● Una vez que la operación está cerrada, no se le puede cambiar el precio.
-● Tenga en cuenta que pasa si se cambia el precio de un artículo
+● Tenga en cuenta que pasa si se cambia el precio de un artículo.
 ● La operación de compra genera el documento remito, solo si todos los ítems son artículos
 (no servicios).
-● Los tests deben ejecutarse correctamente cuando se ejecute por consola “mvn test
+● Los tests deben ejecutarse correctamente cuando se ejecute por consola “mvn test".
