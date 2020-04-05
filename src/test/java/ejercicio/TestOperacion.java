@@ -32,7 +32,7 @@ public class TestOperacion {
 	@Before
 	public void init() {
 		items = new ArrayList<Item>();
-		operacionDeEgreso = new Operacion(Estado.ABIERTA,100,items);
+		operacionDeEgreso = new Operacion(Estado.ABIERTA,0,items);
 		maquina = new Item(250,TipoItem.ARTICULO);
 		lapicera = new Item(90, TipoItem.ARTICULO);
 		luz = new Item(800,TipoItem.SERVICIO);
