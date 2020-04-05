@@ -7,45 +7,51 @@ import excepciones.NoSePuedeCambiarPrecio;
 import excepciones.NoSePuedeGenerarDocumento;
 
 public class Operacion {
-	List<Item> items = new ArrayList<Item>();
-	private double precioFinal;
+	List<Item> items;
+	private int precioFinal;
 	Estado estadoOperacion;
 	
-	private Operacion() {}
-	
-	public Operacion(Estado nuevoEstado, double nuevoPrecio) {
+	public Operacion(Estado nuevoEstado, int nuevoPrecio, List<Item> items) {
+		this.items = new ArrayList<Item>();
 		this.estadoOperacion = nuevoEstado;
 		this.precioFinal = nuevoPrecio;
 	}
 	
-	public double getPrecioFinal() {
-		return precioFinal;
-	}
-	public void setPrecioFinal(double precioFinal) {
-		if(estadoOperacion.equals(Estado.Cerrado)) {
-			throw new NoSePuedeCambiarPrecio("No se puede cambiar el precio porque la operacion esta cerrada");
+	public int modificarPrecioFinal() {
+		if(estadoOperacion.equals(Estado.CERRADA)) {
+			throw new NoSePuedeCambiarPrecio("No se puede modificar el precio porque la operacion esta cerrada");
 		}
-		this.precioFinal = precioFinal;
+		return obtenerPrecioFinal(); 
 	}
-	public void agregarArticulo(Item nuevoItem) {
+
+	public Estado getEstadoOperacion() {
+		return estadoOperacion;
+	}
+
+	public void setEstadoOperacion(Estado estadoOperacion) {
+		this.estadoOperacion = estadoOperacion;
+	}
+	
+	public void agregarItem(Item nuevoItem) {
 		this.items.add(nuevoItem);
 	}
-	public void quitarArticulo(Item item) {
+	public void quitarItem(Item item) {
 		this.items.remove(item);
 	}
 	
 	
-	public double valor() {
-		double valorTotal = this.items.stream()
-			      		.mapToDouble(o -> o.getPrecio())
+	public int obtenerPrecioFinal() {
+		int valorTotal = this.items.stream()
+			      		.mapToInt(item -> item.getPrecio())
 			      		.sum();
-		return valorTotal;
+		return this.precioFinal = valorTotal;
 	}
-	
+
+
 	public Documento compra() {
-		if(!this.items.stream().allMatch(item->item.equals(TipoItem.Articulo))) {
+		if(!this.items.stream().allMatch(item->item.getTipo().equals(TipoItem.ARTICULO))){
 			throw new NoSePuedeGenerarDocumento("No se genera remito");
 		}
-		return new Documento();
+		return new Documento(TipoDocumento.REMITO);
 	}
 }

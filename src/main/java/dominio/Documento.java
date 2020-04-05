@@ -1,5 +1,9 @@
 package dominio;
 
 public class Documento {
-	public Documento() {}
+	TipoDocumento tipoDoc;
+	
+	public Documento(TipoDocumento doc) {
+		this.tipoDoc = doc;
+	}
 }
